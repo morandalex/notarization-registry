@@ -12,6 +12,8 @@ download/install metamask in teh browser and assusre that you have  polygon netw
 
     npm install
 
+then setup .env with infura credentials to upload files to ipfs
+
 ## how to use 
 
 Copy the folder you want to notarize in the root of this project 
