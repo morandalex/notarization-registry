@@ -1,0 +1,26 @@
+Notarizzazione
+
+In questa cartella ci sono i seguenti file : 
+
+- folder-tree.txt : questo file elenca l'alberatura dei file da notarizzare
+- ipfs-hash-table.txt : la lista dei link dei file in backup su storage permanente ipfs
+- sha256-file-list.txt : la lista degli hash sha256 dei file nelle cartelle per determinare se il file non è stato manipolato
+- sha256sum.txt : contiene l'hash del file sha256-file-list.txt per verificare che questo file non sia stato manipolato
+- transaction-parameters.txt : i dati inviati alla blockchain per la marca temporale
+
+In questa cartella ci sono i seguenti tool ( apri i file nel browswer e collegati a internet ):
+- verify.html :  riproduci localmente nel browser l'hash sha256 di un file per verificare che ciò che  gli hash salvati su ipfs sono gli stessi di quelli posseduti localmente
+- download-ipfs-file.html :  fai download della lista degli hash salvata su ipfs
+
+Per verificare che il file sha256-file-list.txt non è stato manipolato 
+- assicurati di essere colleato a internet
+- apri il file verify.html  
+- carica un documento notarizzato
+- confronta l'hash risultante con quelli salvati nel file sha256-file-list.txt 
+
+Per verificare la marca temporale: 
+- assicurati di essere collegato a internet
+- apri il file verify.html
+- carica il documento sha256-file-list.txt
+- copia l'hash risultante 
+- confronta questo hash con quello salvato nella transazione sulla blockchain

@@ -1,0 +1,19 @@
+{
+  "name": "notarization",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ipfs.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "ipfs:file": "node ipfs-file.js",
+    "ipfs:folder": "node ipfs-folder.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "dotenv": "^16.4.5"
+  }
+}

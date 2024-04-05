@@ -1,0 +1,4 @@
+Informazioni per marca temporale su blockchain: 
+
+_ipfshash   : QmRizhWydaidoPUSeL5xs2RmLaqQqM698rNHbjUCwhiiCm
+_ipfslink   : https://moneyviz-notarify.infura-ipfs.io/ipfs/QmRizhWydaidoPUSeL5xs2RmLaqQqM698rNHbjUCwhiiCm

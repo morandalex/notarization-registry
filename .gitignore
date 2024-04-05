@@ -1,0 +1,15 @@
+.env
+.idea
+result/folder-tree.txt
+result/ipfs-hash-table.txt
+result/sha256-file-list.txt
+result/sha256sum.txt
+result/download-ipfs-file.txt
+result/transaction-parameters.txt
+
+
+node_modules
+
+result.zip
+
+contract/artifacts/

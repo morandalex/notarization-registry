@@ -1,0 +1,29 @@
+<a href="https://moneyviz-notarify.infura-ipfs.io/ipfs/QmeyDsWbUXYSoT4bLVNpgjh3fPTEAipn284BYGyocndqbm" download="folder-tree.txt">Ipfs Link to folder-tree.txt</a><br>
+<a href="https://moneyviz-notarify.infura-ipfs.io/ipfs/QmRizhWydaidoPUSeL5xs2RmLaqQqM698rNHbjUCwhiiCm" download="sha256-file-list.txt">Ipfs Link to sha256-file-list.txt</a><br>
+
+    <button onclick="downloadFiles()">Download Files</button>
+    <script>
+      async function downloadFile(url, filename) {
+        try {
+          const response = await fetch(url);
+          const blob = await response.blob();
+          const link = document.createElement('a');
+          link.href = URL.createObjectURL(blob);
+          link.download = filename;
+          link.click();
+          URL.revokeObjectURL(link.href);
+        } catch (error) {
+          console.error('Error downloading file:', error);
+        }
+      }
+
+      function downloadFiles() {
+        const links = document.getElementsByTagName('a');
+        for (const link of links) {
+          const url = link.href;
+          const filename = link.download;
+          downloadFile(url, filename);
+        }
+      }
+    </script>
+    
