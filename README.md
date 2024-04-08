@@ -2,7 +2,7 @@
 
 With this process, you get 
 
-- a zip with files with sha256 string the represent the tamper proof of the files
+- a zip with files with sha256 string that represent the tamper proof of the files
 - the tx link so you have the timestamp of the tamper proof
 
 ## Prerequites 
