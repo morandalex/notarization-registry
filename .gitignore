@@ -7,6 +7,7 @@ result/sha256sum.txt
 result/download-ipfs-file.txt
 result/transaction-parameters.txt
 
+transaction-parameters.txt
 
 node_modules
 
