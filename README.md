@@ -1,9 +1,6 @@
 # Notarize documents of a folder into a Notarization Registry deployed on polygon network  
 
-
-you will gate 
-
-now you have 
+With this process, you get 
 
 - a zip with files with sha256 string the represent the tamper proof of the files
 - the tx link so you have the timestamp of the tamper proof
