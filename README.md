@@ -4,17 +4,20 @@
 
 on a machine that can run bash script ( use mac or ubuntu or wsl )
 - install make
-- install node 18
+- install node 18 ( tip: use nvm eventually to manage the node versions)
+- an account with infura
+- a wallet metamask to deply a contract and interact with NotarizationRegistry deployed 
+- understand how to deploy a contract with thirdweb ( really simple )
 
-download/install metamask in teh browser and assusre that you have  polygon network and some matic to make the transaction ( the transaction costs at the time of writing 0.08$ )
+Download/install metamask in the browser and assure that you have  polygon network and some matic to make the transaction ( the transaction costs at the time of writing 0.08$ )
 
-## install 
+## Install 
 
     npm install
 
-then setup .env with infura credentials to upload files to ipfs
+Then setup .env with infura credentials to upload files to ipfs
 
-## how to use 
+## How to use 
 
 Copy the folder you want to notarize in the root of this project 
 
@@ -43,7 +46,7 @@ then create a transaction filling the function `createNotarizationDoc` with the 
 
     _ipfshash   : QmRizhWydaidoPUSeL5xs2RmLaqQqM698rNHbjUCwhiiCm
     
-    _ipfslink   : https://moneyviz-notarify.infura-ipfs.io/ipfs/QmRizhWydaidoPUSeL5xs2RmLaqQqM698rNHbjUCwhiiCm
+    _ipfslink   : https://<IPFS_GATEWAY_INFURA_NAME>.infura-ipfs.io/ipfs/QmRizhWydaidoPUSeL5xs2RmLaqQqM698rNHbjUCwhiiCm
     
     _sha256hash : fc03b2cc12a4c0c42c1d6136e0def019ac4c3102d15e06ff6173f37cc7d3350b
 
@@ -58,5 +61,60 @@ now give to the client
 - the tx link
 
 to see the data 
+
+
+# check that data are stored in transaction correctly
+
+teh data are stored as input in the calldata of the transaction and you can get that the data are inside in what is called "calldata"
+
+go in the main page of the transaction 
+
+that copy the calldata of the transaction the form of 
+```
+0x4572a7dc000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000120000000000000000000000000000000000000000000000000000000000000004066633033623263633132613463306334326331643631333665306465663031396163346333313032643135653036666636313733663337636337643333353062000000000000000000000000000000000000000000000000000000000000002e516d52697a685779646169646f505553654c35787332526d4c617151714d363938724e48626a554377686969436d000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005c68747470733a2f2f6d6f6e657976697a2d6e6f7461726966792e696e667572612d697066732e696f2f697066732f516d52697a685779646169646f505553654c35787332526d4c617151714d363938724e48626a554377686969436d00000000
+
+```
+
+then convert this data. we have two ways 
+the first is click decode input data on the scan
+![image](https://github.com/morandalex/notarization-registry/assets/9484568/f3110fa9-d7d2-4c92-9599-8df2bf7ad58e)
+
+![image](https://github.com/morandalex/notarization-registry/assets/9484568/98d0db9f-ca05-4fbe-9f56-aca43ff7b668)
+
+alternatively you can copy the "calldata" and paset here https://tools.deth.net/calldata-decoder
+![image](https://github.com/morandalex/notarization-registry/assets/9484568/800d52d7-7068-41d8-a8ba-c0e7cff7d9e0)
+
+then copy the following  "ABI"  used to start the transaction 
+```
+[  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_sha256hash",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_ipfshash",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_ipfslink",
+        "type": "string"
+      }
+    ],
+    "name": "createNotarizationDoc",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }]
+```
+click to decode and you will get back the inputs
+![image](https://github.com/morandalex/notarization-registry/assets/9484568/74e2e237-60e9-426a-ac7b-722dc110ec4c)
+
+
+
+
 
 
