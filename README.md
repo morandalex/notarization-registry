@@ -1,4 +1,4 @@
-# Notarize documents in a folder  
+# Notarize documents of a folder into a Notarization Registry deployed on polygon network  
 
 ## Prerequites 
 
