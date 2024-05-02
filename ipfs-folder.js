@@ -7,21 +7,27 @@ dotenv.config()
 
 
 // Your INFURA project credentials
-const INFURA_PROJECT_ID     = process.env.INFURA_PROJECT_ID
-const INFURA_PROJECT_SECRET = process.env.INFURA_PROJECT_SECRET
+// const INFURA_PROJECT_ID     = process.env.INFURA_PROJECT_ID
+// const INFURA_PROJECT_SECRET = process.env.INFURA_PROJECT_SECRET
 
 const IPFS_GATEWAY_URL      = process.env.IPFS_GATEWAY_URL
+const PINATA_GATEWAY_TOKEN  = process.env.IPFS_PINATA_GATEWAY_TOKEN
 
-const URL                   = 'https://ipfs.infura.io:5001/api/v0/add';
-
+// const URL                   = 'https://ipfs.infura.io:5001/api/v0/add';
+const URL = 'https://api.pinata.cloud/pinning/pinFileToIPFS';
 
 // Encode your project ID and secret for the Authorization header
-const base64Credentials = Buffer.from(`${INFURA_PROJECT_ID}:${INFURA_PROJECT_SECRET}`).toString('base64');
+//const base64Credentials = Buffer.from(`${INFURA_PROJECT_ID}:${INFURA_PROJECT_SECRET}`).toString('base64');
 
 // Construct the headers object
+// const HEADERS = {
+//     'Content-Type': 'multipart/form-data',
+//     'Authorization': `Basic ${base64Credentials}`
+// };
+
+const JWT = process.env.PINATA_SECRET_KEY;
 const HEADERS = {
-    'Content-Type': 'multipart/form-data',
-    'Authorization': `Basic ${base64Credentials}`
+    'Authorization': `Bearer ${JWT}`
 };
 
 
@@ -51,11 +57,27 @@ function calculateSHA256(content) {
 }
 
 // Function to upload content to IPFS, assuming IPFS endpoint expects base64 content
+// async function uploadToIPFS(base64Content) {
+//     const response = await axios.post(URL, { filedata : base64Content }, { headers: HEADERS });
+//     console.log(IPFS_GATEWAY_URL+response.data.Hash )
+//     return response.data.Hash; // Adjust depending on the API response structure
+// }
+
 async function uploadToIPFS(base64Content) {
-    const response = await axios.post(URL, { filedata : base64Content }, { headers: HEADERS });
-    console.log(IPFS_GATEWAY_URL+response.data.Hash )
-    return response.data.Hash; // Adjust depending on the API response structure
+    const text = base64Content;
+    const blob = new Blob([text], {type: "text/plain"});
+    const data = new FormData();
+    data.append("file", blob);
+
+    try {
+        const response = await axios.post(URL, data, {headers: HEADERS});
+        console.log(IPFS_GATEWAY_URL+response.data.IpfsHash+PINATA_GATEWAY_TOKEN)
+        return response.data.IpfsHash
+    } catch (e) {
+        console.error(e)
+    }
 }
+
 
 // Main function to process files in the given directory
 async function processFiles(directoryPath) {
@@ -95,14 +117,14 @@ async function processFiles(directoryPath) {
               ipfsHash = await uploadToIPFS(base64Content);
               //${sha256Hash} 
               //${getFileExtension(file)}
-              summary.push(`${ipfsHash} ${IPFS_GATEWAY_URL+ipfsHash} ${filePath}`);
+              summary.push(`${ipfsHash} ${IPFS_GATEWAY_URL+ipfsHash+PINATA_GATEWAY_TOKEN} ${filePath}`);
 
-              download.push(`<a href="${IPFS_GATEWAY_URL+ipfsHash}" download="${filePath.split('/')[1]}">Ipfs Link to ${filePath.split('/')[1]}</a><br>`);
+              download.push(`<a href="${IPFS_GATEWAY_URL+ipfsHash+PINATA_GATEWAY_TOKEN}" download="${filePath.split('/')[1]}">Ipfs Link to ${filePath.split('/')[1]}</a><br>`);
             }
 
             if(filePath == "result/sha256-file-list.txt"){
               transactionParameters.push (`_ipfshash   : ${ipfsHash}`)
-              transactionParameters.push (`_ipfslink   : ${IPFS_GATEWAY_URL+ipfsHash}`)
+              transactionParameters.push (`_ipfslink   : ${IPFS_GATEWAY_URL+ipfsHash+PINATA_GATEWAY_TOKEN}`)
             }
 
 
