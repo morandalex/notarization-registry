@@ -51,7 +51,7 @@ then create a transaction filling the function `createNotarizationDoc` with the 
 
     _ipfshash   : QmRizhWydaidoPUSeL5xs2RmLaqQqM698rNHbjUCwhiiCm
     
-    _ipfslink   : https://<IPFS_GATEWAY_INFURA_NAME>.infura-ipfs.io/ipfs/QmRizhWydaidoPUSeL5xs2RmLaqQqM698rNHbjUCwhiiCm
+    _ipfslink   : https://<PINATA_GATEWAY_INFURA_NAME>/QmRizhWydaidoPUSeL5xs2RmLaqQqM698rNHbjUCwhiiCm/<PINATA_TOKEN>
     
     _sha256hash : fc03b2cc12a4c0c42c1d6136e0def019ac4c3102d15e06ff6173f37cc7d3350b
 
